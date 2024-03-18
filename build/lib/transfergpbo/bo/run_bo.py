@@ -69,7 +69,7 @@ def run_bo(
 
     regret = []
     for i in range(num_iter):
-       # print(f"Processing for step: {i + 1}")
+        print(f"Processing for step: {i + 1}")
 
         if i == 0:  # sample a random point for the first experiment
             X_new = space.sample_uniform(1)
@@ -83,7 +83,7 @@ def run_bo(
             X = np.append(X, X_new, axis=0)
             Y = np.append(Y, Y_new, axis=0)
 
-        #print(f"Next training point is: {X_new}, {Y_new}")
+        print(f"Next training point is: {X_new}, {Y_new}")
 
         model.fit(TaskData(X, Y), optimize=True)
 
@@ -91,5 +91,5 @@ def run_bo(
             f_min_observed = np.min(experiment_fun(X, output_noise=0.0))
             regret.append((f_min_observed - f_min).item())
 
-    #print("BO loop is finished.")
+    print("BO loop is finished.")
     return regret
