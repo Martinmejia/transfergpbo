@@ -98,16 +98,16 @@ def plot_means_and_errors(result_dict):
             plt.fill_between(x=x_values, y1=mean_array - stderr_array, y2=mean_array + stderr_array, alpha=0.25)
 
     plt.yscale('log')  
-    plt.xlabel('Iteration')
+    plt.xlabel('Number of experiments')
     plt.ylabel('Regret (log scale)')
     plt.title('Means with Standard Errors Hartmann3d')
     plt.legend()
-    plt.savefig('./all_models_1.png', dpi=600)
+    plt.savefig('./loca_test/EI_acc/all_models_1.png', dpi=600)
     plt.close()
 
 
-file_1 = './EI_acc/results_dict_all_plus_points.pkl'
-file_2 = './EI_acc/results_dict_arrays.pkl'
+file_1 = './loca_test/EI_acc/results_dict_all_plus_points.pkl'
+file_2 = './local_testl/EI_acc/results_dict_arrays.pkl'
 
 if __name__ == '__main__':
 
