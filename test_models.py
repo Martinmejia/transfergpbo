@@ -93,7 +93,7 @@ def plot_means_and_errors(result_dict):
             plt.fill_between(x=x_values, y1=mean_array - stderr_array, y2=mean_array + stderr_array, alpha=0.25)
 
     plt.yscale('log')  
-    plt.xlabel('Number of experiments')
+    plt.xlabel('Iteration')
     plt.ylabel('Regret (log scale)')
     plt.title('Means with Standard Errors Hartmann3d')
     plt.legend()
