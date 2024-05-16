@@ -42,6 +42,7 @@ RGPE - Scalable Meta-Learning for Bayesian Optimization. https://arxiv.org/pdf/1
 '''
 
 technique_list = ['GPBO', 'MHGP', 'SHGP', 'BHGP', 'WSGP', 'HGP', 'MTGP', 'RGPE']
+source_points  = [1,5,10,20, 60]
 
 def run_bo_50(technique):
     """
@@ -56,8 +57,10 @@ def run_bo_50(technique):
     - output_std_error (np.ndarray): Standard error of regret over iterations.
     """
 
+    parameters.parameters['benchmark']['num_source_points'] = [source_points]
     parameters.parameters['technique'] = technique
     output = collections.defaultdict(list)
+
 
     for i in tqdm(range(50), desc=f'Running {technique}'):
         np.random.seed(i)
@@ -68,8 +71,6 @@ def run_bo_50(technique):
     regret_array     = np.array(output['output_tuple_regret'])
     output_mean      = np.mean(regret_array, dtype=np.float64, axis=0)
     output_std_error = np.std(regret_array, dtype=np.float64, axis=0) / np.sqrt(regret_array.shape[0])
-    #X_arr            = np.concatenate([ii[0] for ii in output['output_tuple_X_Y_regret']])
-    #Y_arr            = np.concatenate([ii[1] for ii in output['output_tuple_X_Y_regret']])
 
     
     return regret_array, output_mean, output_std_error
@@ -116,8 +117,6 @@ if __name__ == '__main__':
 
     for name in tqdm(technique_list):
         regret, mean, stderr = run_bo_50(name)
-        # array_dict[f'{name}_X'] = X
-        # array_dict[f'{name}_Y'] = Y
         array_dict[f'{name}_regret'] = regret
         result_dict[f'{name}_mean'] = mean
         result_dict[f'{name}_stderr'] = stderr
@@ -128,5 +127,5 @@ if __name__ == '__main__':
     with open(file_2, 'wb') as f:
         pickle.dump(array_dict, f)
 
-        plot_means_and_errors(result_dict)
+    plot_means_and_errors(result_dict)
 
