@@ -1,4 +1,4 @@
-name: BO_env
+name: botest_env
 channels:
   - conda-forge
   - defaults
